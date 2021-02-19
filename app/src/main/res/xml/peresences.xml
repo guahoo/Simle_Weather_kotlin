@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceCategory
+    android:title="Weather location">
+    </PreferenceCategory>
+    <SwitchPreference
+        android:key="USE_DEVISE_LOCATION"
+        android:title="Use devise location"
+        android:summary="Allow the app to get your location"
+        android:defaultValue="true"
+        android:disableDependentsState="true"/>
+
+    <EditTextPreference
+        android:key="CUSTOM_LOCATION"
+        android:title="London"
+        android:summary="Введите название населенного пункта"
+        android:defaultValue="London"
+        android:dependency="USE_DEVISE_LOCATION"/>
+
+</PreferenceScreen>
