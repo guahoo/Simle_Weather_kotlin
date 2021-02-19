@@ -1,4 +1,4 @@
-package com.simple_weather.ui.weather
+package com.simple_weather.ui.weather.current
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -10,9 +10,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.simple_weather.Provider.GEOCODER_AREA_NAME
-import com.simple_weather.Provider.GEOCODER_LOCALITY_NAME
-import com.simple_weather.Provider.USE_DEVISE_LOCATION
+import com.simple_weather.provider.GEOCODER_AREA_NAME
+import com.simple_weather.provider.GEOCODER_LOCALITY_NAME
+import com.simple_weather.provider.USE_DEVISE_LOCATION
 import com.simple_weather.R
 
 import com.simple_weather.internal.LONGDATETIMEPATTERN
@@ -20,8 +20,6 @@ import com.simple_weather.internal.SHORTTIMEPATTERN
 import com.simple_weather.internal.WeatherIconMap
 import com.simple_weather.internal.WeatherParamConverter
 import com.simple_weather.ui.base.ScopedFragment
-import com.simple_weather.ui.weather.current.CurrentWeatherViewModel
-import com.simple_weather.ui.weather.current.CurrentWeatherViewModelFactory
 import kotlinx.android.synthetic.main.current_weather_fragment.*
 import kotlinx.coroutines.*
 import org.json.JSONArray

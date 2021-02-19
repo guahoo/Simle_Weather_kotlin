@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.google.android.gms.location.LocationServices
 import com.jakewharton.threetenabp.AndroidThreeTen
-import com.simple_weather.Provider.LocationProviderImpl
+import com.simple_weather.provider.LocationProviderImpl
 import com.simple_weather.data.db.ForecastDataBase
 import com.simple_weather.data.repository.ForecastRepository
 import com.simple_weather.data.repository.ForecastRepositoryImpl

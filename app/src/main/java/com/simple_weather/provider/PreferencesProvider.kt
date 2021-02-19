@@ -1,4 +1,4 @@
-package com.simple_weather.Provider
+package com.simple_weather.provider
 
 import android.content.Context
 import android.content.SharedPreferences

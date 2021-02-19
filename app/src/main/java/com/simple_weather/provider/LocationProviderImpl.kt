@@ -1,4 +1,4 @@
-package com.simple_weather.Provider
+package com.simple_weather.provider
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,7 +7,7 @@ import android.location.Geocoder
 import android.location.Location
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.simple_weather.data.db.entity.current.Coord
+import com.simple_weather.data.db.entity.weather_entry.Coord
 import com.simple_weather.internal.LocationPermissionNotGrantedException
 import com.simple_weather.internal.asDeferred
 import kotlinx.coroutines.Deferred
@@ -24,7 +24,7 @@ class LocationProviderImpl(
         private val fusedLocationProviderClient: FusedLocationProviderClient,
         context: Context) : LocationProvider, PreferencesProvider(context) {
 
-    override suspend fun hasLocationChanged(weatherLocation: Coord): Boolean {
+     suspend fun hasLocationChanged(weatherLocation: Coord): Boolean {
         val deviceLocationChanged = try {
             hasDeviceLocationChanged(weatherLocation)
 
@@ -37,10 +37,10 @@ class LocationProviderImpl(
         return true
     }
 
-    private fun hasCustomLocationChanged(weatherLocation: Coord): Boolean {
-        val customLocationName = getCustomLocationName()
-        return true
-    }
+//    private fun hasCustomLocationChanged(weatherLocation: Coord): Boolean {
+//        val customLocationName = getCustomLocationName()
+//        return true
+//    }
 
     private fun getCustomLocationName(): String? {
         return preferences.getString(CUSTOM_LOCATION, "")

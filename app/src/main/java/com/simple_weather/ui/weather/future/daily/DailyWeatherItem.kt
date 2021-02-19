@@ -1,10 +1,9 @@
 package com.simple_weather.ui.weather.future.daily
 
 import android.content.Context
-import android.graphics.PorterDuff
 import androidx.core.content.ContextCompat
 import com.simple_weather.R
-import com.simple_weather.data.db.entity.future.futureDaily.ConditionDailyWeather
+import com.simple_weather.data.db.entity.weather_entry.ConditionDailyWeather
 import com.simple_weather.internal.*
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder

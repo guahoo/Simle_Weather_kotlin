@@ -10,9 +10,9 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
-import com.simple_weather.Provider.GEOCODER_AREA_NAME
-import com.simple_weather.Provider.GEOCODER_LOCALITY_NAME
-import com.simple_weather.Provider.USE_DEVISE_LOCATION
+import com.simple_weather.provider.GEOCODER_AREA_NAME
+import com.simple_weather.provider.GEOCODER_LOCALITY_NAME
+import com.simple_weather.provider.USE_DEVISE_LOCATION
 import com.simple_weather.R
 import com.simple_weather.internal.LONGDATETIMEPATTERN
 import com.simple_weather.internal.SHORTTIMEPATTERN

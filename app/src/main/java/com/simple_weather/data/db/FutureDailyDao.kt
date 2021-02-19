@@ -5,8 +5,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.simple_weather.data.db.entity.future.futureDaily.ConditionDailyWeather
-import com.simple_weather.data.db.entity.future.futureDaily.FutureDailyWeatherEntry
+import com.simple_weather.data.db.entity.weather_entry.ConditionDailyWeather
+import com.simple_weather.data.db.entity.weather_entry.FutureDailyWeatherEntry
 
 @Dao
     interface FutureDailyDao {

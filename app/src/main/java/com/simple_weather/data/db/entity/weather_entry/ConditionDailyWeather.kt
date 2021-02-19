@@ -1,4 +1,4 @@
-package com.simple_weather.data.db.entity.future.futureDaily
+package com.simple_weather.data.db.entity.weather_entry
 
 import androidx.room.ColumnInfo
 
@@ -13,7 +13,7 @@ val dt: Long,
 
 @ColumnInfo(name = "cityName") val cityName: String,
 
-// @ColumnInfo(name = "sys_sunset") val sys_sunset: Long,
+
 
 @ColumnInfo(name = "temp_day") val day_temp: Double,
 
@@ -32,6 +32,6 @@ val dt: Long,
 
 @ColumnInfo(name = "weather") val weather: String,
 
-//@ColumnInfo(name = "visibility") val visibility: Int
+
 )
 

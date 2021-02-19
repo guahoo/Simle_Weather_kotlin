@@ -1,4 +1,4 @@
-package com.simple_weather.data.db.entity.current
+package com.simple_weather.data.db.entity.weather_entry
 
 
 

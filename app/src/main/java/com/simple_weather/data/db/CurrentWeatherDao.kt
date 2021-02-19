@@ -2,9 +2,9 @@ package com.simple_weather.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.simple_weather.data.db.entity.current.CURRENT_WEATHER_ID
-import com.simple_weather.data.db.entity.current.ConditionCurrentWeatherEntry
-import com.simple_weather.data.db.entity.current.CurrentWeatherEntry
+import com.simple_weather.data.db.entity.weather_entry.CURRENT_WEATHER_ID
+import com.simple_weather.data.db.entity.weather_entry.ConditionCurrentWeatherEntry
+import com.simple_weather.data.db.entity.weather_entry.CurrentWeatherEntry
 
 
 @Dao

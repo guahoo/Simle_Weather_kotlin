@@ -1,4 +1,4 @@
-package com.simple_weather.data.db.entity.future.futureDaily
+package com.simple_weather.data.db.entity.weather_entry
 
 
 import com.google.gson.annotations.SerializedName

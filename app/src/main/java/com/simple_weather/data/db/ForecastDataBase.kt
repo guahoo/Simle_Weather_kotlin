@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.simple_weather.data.db.entity.current.CurrentWeatherEntry
+import com.simple_weather.data.db.entity.weather_entry.CurrentWeatherEntry
 import com.simple_weather.internal.LocalDateConverter
-import com.simple_weather.data.db.entity.future.forecastByHours.FutureHourlyWeatherEntry
-import com.simple_weather.data.db.entity.future.futureDaily.FutureDailyWeatherEntry
+import com.simple_weather.data.db.entity.weather_entry.FutureHourlyWeatherEntry
+import com.simple_weather.data.db.entity.weather_entry.FutureDailyWeatherEntry
 
 
 @Database(

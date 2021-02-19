@@ -3,9 +3,9 @@ package com.simple_weather.data.db.converters
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.simple_weather.data.db.entity.current.Weather
+import com.simple_weather.data.db.entity.weather_entry.Weather
 
-class ListTypeConvertersCurrentWeather {
+class ListTypeConvertersWeather {
 
     var gson = Gson()
     @TypeConverter

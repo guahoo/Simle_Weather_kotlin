@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient_night"
-    tools:context="com.simple_weather.ui.weather.CurrentWeatherFragment">
+    tools:context="com.simple_weather.ui.weather.current.CurrentWeatherFragment">
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -15,14 +15,11 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.24" />
 
-
-
-
-
     <androidx.constraintlayout.widget.Group
         android:id="@+id/loadingWidgetGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         app:constraint_referenced_ids="pb_loading,tv_loading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -87,7 +84,7 @@
             android:id="@+id/weatherDisplayGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="tv_cityName,bottom_layout" />
+            app:constraint_referenced_ids="top_layout,bottom_layout" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/top_layout"

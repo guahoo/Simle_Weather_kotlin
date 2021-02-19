@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.simple_weather.R
-import com.simple_weather.data.db.entity.future.futureDaily.ConditionDailyWeather
+import com.simple_weather.data.db.entity.weather_entry.ConditionDailyWeather
 import com.simple_weather.ui.base.ScopedFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder

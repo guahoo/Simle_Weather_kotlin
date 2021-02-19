@@ -1,9 +1,9 @@
 package com.simple_weather.data.repository
 
 import androidx.lifecycle.LiveData
-import com.simple_weather.data.db.entity.current.ConditionCurrentWeatherEntry
-import com.simple_weather.data.db.entity.future.forecastByHours.ConditionFutureWeatherEntry
-import com.simple_weather.data.db.entity.future.futureDaily.ConditionDailyWeather
+import com.simple_weather.data.db.entity.weather_entry.ConditionCurrentWeatherEntry
+import com.simple_weather.data.db.entity.weather_entry.ConditionFutureWeatherEntry
+import com.simple_weather.data.db.entity.weather_entry.ConditionDailyWeather
 
 interface ForecastRepository {
     suspend fun getCurrentWeather(): LiveData<out ConditionCurrentWeatherEntry>

@@ -1,9 +1,9 @@
-package com.simple_weather.network.networkresponse.futureWeatherResponse
+package com.simple_weather.internal
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.simple_weather.data.db.entity.future.forecastByHours.Weather
+import com.simple_weather.data.db.entity.weather_entry.Weather
 
 class ListTypeConverters {
     var gson = Gson()

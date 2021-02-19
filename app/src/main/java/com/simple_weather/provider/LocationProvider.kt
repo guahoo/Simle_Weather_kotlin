@@ -1,9 +1,7 @@
-package com.simple_weather.Provider
-
-import com.simple_weather.data.db.entity.current.Coord
+package com.simple_weather.provider
 
 interface LocationProvider {
-    suspend fun hasLocationChanged(weatherLocation: Coord): Boolean
+   // suspend fun hasLocationChanged(weatherLocation: Coord): Boolean
     suspend fun getPreferredLocationStringOrCoords(): Array<String>
     fun getLocationName():String?
     fun isUsingDeviceLocation(): Boolean

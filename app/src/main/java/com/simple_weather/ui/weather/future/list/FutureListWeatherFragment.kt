@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.simple_weather.R
-import com.simple_weather.data.db.entity.future.forecastByHours.ConditionFutureWeatherEntry
+import com.simple_weather.data.db.entity.weather_entry.ConditionFutureWeatherEntry
 import com.simple_weather.ui.base.ScopedFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder

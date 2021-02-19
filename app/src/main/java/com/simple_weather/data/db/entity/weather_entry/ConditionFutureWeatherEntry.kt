@@ -1,11 +1,11 @@
-package com.simple_weather.data.db.entity.future.forecastByHours
+package com.simple_weather.data.db.entity.weather_entry
 
 import androidx.room.ColumnInfo
 import androidx.room.TypeConverters
 
-import com.simple_weather.data.db.converters.ListTypeConvertersCurrentWeather
+import com.simple_weather.data.db.converters.ListTypeConvertersWeather
 
-@TypeConverters(ListTypeConvertersCurrentWeather::class)
+@TypeConverters(ListTypeConvertersWeather::class)
 data class ConditionFutureWeatherEntry(
 //        id,clouds,dewPoint,dt,feelsLike,humidity,pop,pressure,temp,uvi,visibility,weather,windDeg,windSpeed
         @ColumnInfo(name = "dt")
@@ -17,8 +17,6 @@ data class ConditionFutureWeatherEntry(
         @ColumnInfo(name = "windSpeed") val wind_speed: Double,
 
         @ColumnInfo(name = "cityName") val cityName: String,
-
-       // @ColumnInfo(name = "sys_sunset") val sys_sunset: Long,
 
         @ColumnInfo(name = "temp") val main_temp: Double,
 
