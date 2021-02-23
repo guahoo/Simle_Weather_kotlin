@@ -9,15 +9,15 @@ import com.simple_weather.data.db.converters.ListTypeConvertersWeather
 @TypeConverters(ListTypeConvertersWeather::class)
 data class FutureDailyWeatherEntry(
         @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+        val id: Int? = null,
         val clouds: Int,
         var cityName: String,
         @SerializedName("dew_point")
-    val dewPoint: Double,
+        val dewPoint: Double,
         val dt: Long,
         @Embedded(prefix = "feelsLike_")
-    @SerializedName("feels_like")
-    val feelsLike: FeelsLike,
+        @SerializedName("feels_like")
+        val feelsLike: FeelsLike,
         val humidity: Int,
         val pop: Double,
         val pressure: Int,
@@ -26,11 +26,11 @@ data class FutureDailyWeatherEntry(
         val sunrise: Int,
         val sunset: Int,
         @Embedded(prefix = "temp_")
-    val temp: Temp,
+        val temp: Temp,
         val uvi: Double,
         val weather: List<Weather>,
         @SerializedName("wind_deg")
-    val windDeg: Int,
+        val windDeg: Int,
         @SerializedName("wind_speed")
-    val windSpeed: Double
+        val windSpeed: Double
 )

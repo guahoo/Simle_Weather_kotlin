@@ -4,17 +4,17 @@
     android:title="Weather location">
     </PreferenceCategory>
     <SwitchPreference
-        android:key="USE_DEVISE_LOCATION"
+        android:key="USE_DEVICE_LOCATION"
         android:title="Use devise location"
         android:summary="Allow the app to get your location"
         android:defaultValue="true"
         android:disableDependentsState="true"/>
 
-    <EditTextPreference
+    <Preference
         android:key="CUSTOM_LOCATION"
-        android:title="London"
+        android:title="Input location"
         android:summary="Введите название населенного пункта"
         android:defaultValue="London"
-        android:dependency="USE_DEVISE_LOCATION"/>
+        android:dependency="USE_DEVICE_LOCATION"/>
 
 </PreferenceScreen>

@@ -1,30 +1,32 @@
 package com.simple_weather.data.repository
 
 
+import android.content.Intent
 import android.util.Log
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
-import com.simple_weather.provider.LocationProvider
 import com.simple_weather.data.db.*
 import com.simple_weather.data.db.entity.weather_entry.ConditionCurrentWeatherEntry
-import com.simple_weather.data.db.FutureDailyDao
-import com.simple_weather.data.db.entity.weather_entry.ConditionFutureWeatherEntry
 import com.simple_weather.data.db.entity.weather_entry.ConditionDailyWeather
+import com.simple_weather.data.db.entity.weather_entry.ConditionFutureWeatherEntry
 import com.simple_weather.network.WeatherDataSourse
 import com.simple_weather.network.networkresponse.WeatherAllInOneResponse
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.simple_weather.provider.LocationProvider
+import com.simple_weather.ui.settings.SettingsFragment
+import kotlinx.coroutines.*
+import org.threeten.bp.Instant
+import org.threeten.bp.ZoneId
+import org.threeten.bp.ZonedDateTime
 import java.util.*
 
+private lateinit var lastUpdate: ZonedDateTime
 
 class ForecastRepositoryImpl(
-    private val currentWeatherDao: CurrentWeatherDao,
-    private val futureWeatherDao: FutureWeatherDao,
-    private val weatherDataSourse: WeatherDataSourse,
-    private val futureDailyDao: FutureDailyDao,
-    private val locationProvider: LocationProvider
-
+        private val currentWeatherDao: CurrentWeatherDao,
+        private val futureWeatherDao: FutureWeatherDao,
+        private val weatherDataSourse: WeatherDataSourse,
+        private val futureDailyDao: FutureDailyDao,
+        private val locationProvider: LocationProvider
 
 
 ) : ForecastRepository {
@@ -32,7 +34,7 @@ class ForecastRepositoryImpl(
 
         weatherDataSourse.apply {
             downloadedWeatherAllInOneWeatherResponse.observeForever { newFutureWeather ->
-               persistFetchDailyWeather(newFutureWeather)
+                persistFetchDailyWeather(newFutureWeather)
             }
         }
 
@@ -54,7 +56,6 @@ class ForecastRepositoryImpl(
     }
 
 
-
     override suspend fun getFutureWeatherByDt(dt: Long): LiveData<out ConditionFutureWeatherEntry> {
         return withContext(Dispatchers.IO) {
             initWeatherData()
@@ -71,37 +72,58 @@ class ForecastRepositoryImpl(
 
 
     private suspend fun initWeatherData() {
-        val lastWeatherLocation = currentWeatherDao.getCurrentWeather().value
+        val lastWeatherLocation: Long = if (currentWeatherDao.getCurrentWeatherNonLive()!=null) {
+            currentWeatherDao.getCurrentWeatherNonLive()!!.dt*1000
+        } else{
+            0
+        }
+        println("location ${currentWeatherDao.getCurrentWeather().value.toString()}")
+
         if (lastWeatherLocation == null) {
+
             fetchWeather()
 
+        }
+        if (isFetchCurrentNeeded(ZonedDateTime.ofInstant(Instant.ofEpochMilli(lastWeatherLocation), ZoneId.systemDefault()))) {
+            fetchWeather()
         }
 
     }
 
 
-
     private fun persistFetchDailyWeather(fetchedWeatherResponse: WeatherAllInOneResponse) {
+
         try {
 
             GlobalScope.launch(Dispatchers.IO) {
                 val dailyWeatherList = fetchedWeatherResponse.daily.toList()
                 val hourlyWeatherList = fetchedWeatherResponse.hourly.toList()
-                (dailyWeatherList.indices).forEach{
-                    dailyWeatherList[it].cityName = locationProvider.getLocationName().toString()
-                }
-
-                (hourlyWeatherList.indices).forEach{
-                    hourlyWeatherList[it].cityName = locationProvider.getLocationName().toString()
-                }
-
                 val currentWeather = fetchedWeatherResponse.current
 
+
+//
+                val locationName = locationProvider.getLocationName(locationProvider.getPreferredLocationString()[0].toDouble(),
+                        locationProvider.getPreferredLocationString()[1].toDouble())
+
+                currentWeather.name = locationName
+
+                (dailyWeatherList.indices).forEach {
+                    dailyWeatherList[it].cityName = locationName
+                }
+
+                (hourlyWeatherList.indices).forEach {
+                    hourlyWeatherList[it].cityName = locationName
+                }
+
+
+
+
+
+                currentWeatherDao.upsert(currentWeather)
                 futureDailyDao.insert(dailyWeatherList)
                 futureWeatherDao.insert(hourlyWeatherList)
 
-                currentWeather.name = locationProvider.getLocationName().toString()
-                currentWeatherDao.upsert(currentWeather)
+
             }
         } catch (e: Exception) {
             Log.e("111", "Ex")
@@ -109,17 +131,28 @@ class ForecastRepositoryImpl(
     }
 
     private suspend fun fetchWeather() {
-        val deviceLocationLat: String
-        val deviceLocationLon: String
-        if (locationProvider.isUsingDeviceLocation() && locationProvider.getPreferredLocationStringOrCoords().size > 1) {
-            deviceLocationLat = locationProvider.getPreferredLocationStringOrCoords()[0]
-            deviceLocationLon = locationProvider.getPreferredLocationStringOrCoords()[1]
 
-            weatherDataSourse.fetchWeatherByCoord(
-                deviceLocationLat, deviceLocationLon,
-                Locale.getDefault().language
-            )
-        }
+try {
+    val deviceLocationLat: String = locationProvider.getPreferredLocationString()[0]
+    val deviceLocationLon: String = locationProvider.getPreferredLocationString()[1]
+
+    weatherDataSourse.fetchWeatherByCoord(
+            deviceLocationLat, deviceLocationLon,
+            Locale.getDefault().language
+    )
+} catch (aE: retrofit2.HttpException){
+
+    println(aE.message)
+}
+
+
+
     }
+
+    private fun isFetchCurrentNeeded(lastFetchTime: ZonedDateTime): Boolean {
+        val thirtyMinutesAgo = ZonedDateTime.now().minusMinutes(0)
+        return lastFetchTime.isBefore(thirtyMinutesAgo)
+    }
+
 }
 

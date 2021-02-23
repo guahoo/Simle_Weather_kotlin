@@ -75,6 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:visibility="invisible"
 
         android:gravity="center"
 
@@ -122,7 +123,7 @@
                         android:id="@+id/tv_cityName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ВОСКРЕСЕНСК"
+                        android:text="Урюпинск"
                         android:textColor="@color/white"
                         android:textSize="30sp"
                         android:layout_marginTop="10dp"

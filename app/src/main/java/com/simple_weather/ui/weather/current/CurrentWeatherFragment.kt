@@ -10,9 +10,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.simple_weather.provider.GEOCODER_AREA_NAME
-import com.simple_weather.provider.GEOCODER_LOCALITY_NAME
-import com.simple_weather.provider.USE_DEVISE_LOCATION
+
 import com.simple_weather.R
 
 import com.simple_weather.internal.LONGDATETIMEPATTERN
@@ -27,6 +25,12 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
+
+
+const val USE_DEVISE_LOCATION = "USE_DEVISE_LOCATION"
+const val CUSTOM_LOCATION = "CUSTOM_LOCATION"
+const val GEOCODER_LOCALITY_NAME = "GEOCODER_LOCALITY_NAME"
+const val GEOCODER_AREA_NAME = "GEOCODER_AREA_NAME"
 
 class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
 
@@ -65,6 +69,7 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
         currentWeather.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
             loadingWidgetGroup.visibility = View.GONE
+            weatherDisplayLayout.visibility = View.VISIBLE
             errorMessageShow(isErrorsCatching(it.name))
             weatherShow(isErrorsCatching(it.name))
 
@@ -74,8 +79,10 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
 
             area = preferences.getString(GEOCODER_AREA_NAME, "")
 
-            if (preferences.getBoolean(USE_DEVISE_LOCATION, true)) updateLocation(locality) else updateLocation(it.name)
-            if (preferences.getBoolean(USE_DEVISE_LOCATION, true) && area!=null) updateLocation(locality,area)
+            updateLocation(locality,area)
+
+            if (preferences.getBoolean(USE_DEVISE_LOCATION, true)) updateLocation(locality) else updateLocation(locality,area)
+//            if (preferences.getBoolean(USE_DEVISE_LOCATION, true) && area!=null) updateLocation(locality,area)
 
 
 

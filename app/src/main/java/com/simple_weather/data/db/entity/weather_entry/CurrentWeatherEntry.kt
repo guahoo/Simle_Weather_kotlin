@@ -3,6 +3,9 @@ package com.simple_weather.data.db.entity.weather_entry
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
 import com.simple_weather.data.db.converters.ListTypeConvertersWeather
+import org.threeten.bp.Instant
+import org.threeten.bp.ZoneId
+import java.time.ZonedDateTime
 
 
 const val CURRENT_WEATHER_ID = 0
@@ -16,7 +19,7 @@ data class CurrentWeatherEntry (
         val clouds: Int,
         @SerializedName("dew_point")
         val dewPoint: Double,
-        val dt: Int,
+        val dt: Long,
         @SerializedName("feels_like")
         val feelsLike: Double,
         val humidity: Int,
@@ -34,6 +37,12 @@ data class CurrentWeatherEntry (
     {
         @PrimaryKey(autoGenerate = false)
         var idCurrentWeather: Int = CURRENT_WEATHER_ID
+
+        val zonedDateTime:org.threeten.bp.ZonedDateTime
+            get() {
+                val instant =Instant.ofEpochSecond(dt)
+                return org.threeten.bp.ZonedDateTime.ofInstant(instant,ZoneId.systemDefault())
+            }
 
     }
 

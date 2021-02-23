@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_gradient_night"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/cityNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:hint="London"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:singleLine="true"
+            android:textColorHint="#FFBCC0CE"
+            android:textSize="23sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <ImageButton
+                android:id="@+id/ok_Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_ok_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="VectorDrawableCompat" />
+
+            <ProgressBar
+
+                android:id="@+id/loader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/ok_Btn"
+                app:layout_constraintEnd_toEndOf="@+id/ok_Btn"
+                app:layout_constraintStart_toStartOf="@id/ok_Btn"
+                app:layout_constraintTop_toTopOf="@+id/ok_Btn">
+
+            </ProgressBar>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <ListView
+            android:id="@+id/cityList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:ignore="NotSibling">
+
+        </ListView>
+
+
+    </LinearLayout>
+
+
+
+
+
+</FrameLayout>
+
+
