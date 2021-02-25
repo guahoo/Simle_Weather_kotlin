@@ -10,7 +10,7 @@ class FutureDetailWeatherViewModelFactory (
         private val date:Long
 
 ): ViewModelProvider.NewInstanceFactory() {
-    @Suppress("UNCHECKED_CAST")
+
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return FutureDetailWeatherViewModel(date,forecastRepository) as T
     }

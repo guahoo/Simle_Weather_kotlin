@@ -37,8 +37,9 @@ class ForecastApplication: Application(), KodeinAware {
         bind<LocationProviderImpl>() with singleton { LocationProviderImpl(instance(),instance()) }
         bind() from provider { CurrentWeatherViewModelFactory(instance()) }
         bind() from provider { FutureListWeatherViewModelFactory(instance()) }
-        bind() from provider { DailyListWeatherViewModelFactory(instance()) }
+       // bind() from provider { DailyListWeatherViewModelFactory(instance()) }
         bind() from factory { detailDate: Long -> FutureDetailWeatherViewModelFactory(instance(),detailDate) }
+        bind() from factory { detailLoc: String, detailDate:Long -> DailyListWeatherViewModelFactory( instance(),detailLoc, detailDate) }
 
     }
 

@@ -1,6 +1,8 @@
 package com.simple_weather.ui.weather.future.daily
 
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,22 +12,31 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.simple_weather.R
 import com.simple_weather.data.db.entity.weather_entry.ConditionDailyWeather
 import com.simple_weather.ui.base.ScopedFragment
+import com.simple_weather.ui.weather.current.GEOCODER_LOCALITY_NAME
+import com.simple_weather.ui.weather.future.detail.FutureDetailWeatherFragmentArgs
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.current_weather_fragment.*
 import kotlinx.android.synthetic.main.future_list_weather_fragment.*
+import kotlinx.android.synthetic.main.item_daily_weather.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
+import org.kodein.di.Multi2
 import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.factory
+import org.kodein.di.generic.factory2
 import org.kodein.di.generic.instance
-import kotlinx.android.synthetic.main.item_daily_weather.*
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZoneOffset
+import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KProperty
 
 
 class DailyListWeatherFragment : ScopedFragment(),KodeinAware {
 
     override val kodein by closestKodein()
-    private val viewModelFactory: DailyListWeatherViewModelFactory by instance()
+    private val viewModelFactory  : ((String,Long) -> DailyListWeatherViewModelFactory) by factory2()
 
 
     private lateinit var viewModel: DailyListWeatherViewModel
@@ -39,7 +50,14 @@ class DailyListWeatherFragment : ScopedFragment(),KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(DailyListWeatherViewModel::class.java)
+        val safeArgs = arguments?.let { FutureDetailWeatherFragmentArgs.fromBundle(it) }
+        val preferences:SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+
+        val datetime: LocalDateTime = LocalDateTime.now()
+        val milliseconds = datetime.atZone(ZoneOffset.UTC)?.toInstant()?.toEpochMilli()?.div(1000)
+
+        
+        viewModel = ViewModelProvider(this, viewModelFactory(preferences.getString(GEOCODER_LOCALITY_NAME, "London"),milliseconds!!)).get(DailyListWeatherViewModel::class.java)
         bindUI()
         // TODO: Use the ViewModel
     }
@@ -59,7 +77,7 @@ class DailyListWeatherFragment : ScopedFragment(),KodeinAware {
 
     private fun List<ConditionDailyWeather>.toFutureWeatherItems() : List<DailyWeatherItem> {
         return this.map {
-            DailyWeatherItem(it,context?.applicationContext)
+            DailyWeatherItem(it, context?.applicationContext)
         }
     }
 
@@ -96,3 +114,7 @@ class DailyListWeatherFragment : ScopedFragment(),KodeinAware {
 //
 //    }
 }
+
+
+
+

@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import com.simple_weather.data.repository.ForecastRepository
 import com.simple_weather.internal.lazyDeferred
 
-class DailyListWeatherViewModel(private val forecastRepository: ForecastRepository) : ViewModel() {
+class DailyListWeatherViewModel(private val forecastRepository: ForecastRepository, private val loc:String, private val date:Long) : ViewModel() {
 
         val weatherEntries by lazyDeferred {
-            forecastRepository.getDailyWeather()
+            forecastRepository.getDailyWeather(loc,date)
         }
 }

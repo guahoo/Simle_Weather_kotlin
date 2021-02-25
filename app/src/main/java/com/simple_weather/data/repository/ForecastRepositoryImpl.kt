@@ -63,10 +63,10 @@ class ForecastRepositoryImpl(
         }
     }
 
-    override suspend fun getDailyWeather(): LiveData<out List<ConditionDailyWeather>> {
+    override suspend fun getDailyWeather(loc: String,date: Long): LiveData<out List<ConditionDailyWeather>> {
         return withContext(Dispatchers.IO) {
             initWeatherData()
-            return@withContext futureDailyDao.getDailyWeather()
+            return@withContext futureDailyDao.getDailyWeatherByLoc(loc, date)
         }
     }
 

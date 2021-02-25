@@ -119,11 +119,12 @@ class LocationProviderImpl(
             if (listAddresses[0].locality.length != null) {
                 preferences.edit().putString(GEOCODER_LOCALITY_NAME, listAddresses[0].locality).apply()
                 preferences.edit().putString(GEOCODER_AREA_NAME, "${listAddresses[0].subAdminArea}, ${listAddresses[0].adminArea}").apply()
+
             } else {
                 preferences.edit().putString(GEOCODER_LOCALITY_NAME, listAddresses[0].subAdminArea).apply()
                 preferences.edit().putString(GEOCODER_AREA_NAME, listAddresses[0].adminArea).apply()
             }
         }
-         return listAddresses[0].locality
+         return listAddresses[0].locality?:listAddresses[0].subAdminArea
     }
 }

@@ -9,5 +9,5 @@ interface ForecastRepository {
     suspend fun getCurrentWeather(): LiveData<out ConditionCurrentWeatherEntry>
     suspend fun getFutureWeather(): LiveData<out List<ConditionFutureWeatherEntry>>
     suspend fun getFutureWeatherByDt(dt:Long): LiveData<out ConditionFutureWeatherEntry>
-    suspend fun getDailyWeather(): LiveData<out List<ConditionDailyWeather>>
+    suspend fun getDailyWeather(loc:String, date:Long): LiveData<out List<ConditionDailyWeather>>
 }

@@ -16,6 +16,9 @@ import com.simple_weather.data.db.entity.weather_entry.FutureDailyWeatherEntry
         @Query("select * from daily_weather")
         fun getDailyWeather() : LiveData<List<ConditionDailyWeather>>
 
+        @Query("select * from daily_weather where cityName = (:cityName) and dt > (:date)")
+        fun getDailyWeatherByLoc(cityName:String, date:Long) : LiveData<List<ConditionDailyWeather>>
+
 //        @Query("select * from daily_weather where dt = :date")
 //        fun getDetailedFutureWeather(date:Long) : LiveData<ConditionDailyWeather>
 
